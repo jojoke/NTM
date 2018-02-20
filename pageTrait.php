@@ -42,8 +42,15 @@
 				echo "Echec du telechargement de la matrice !";
 			}
 		}
+		else
+		{
+			echo "Mauvais element !";
+		}
 	}
-
+	else
+	{
+		echo "Mauvais service!";
+	}
 ?>
 
 <html>
@@ -55,7 +62,7 @@
 	function writeMatrix()
 	{
 		var matrix='<?php echo $downloadClientMatrix; ?>';
-		localStorage.setItem('INSACVL2', matrix);
+		localStorage.setItem('INSACVL3:mohammed.el_khadiri@insa-cvl.fr', matrix);
 	}
 </script>
 
@@ -63,7 +70,7 @@
 <script type="text/javascript">
 	function read()
 	{
-		var matrix = localStorage.getItem('INSACVL2');
+		var matrix = localStorage.getItem('INSACVL3:mohammed.el_khadiri@insa-cvl.fr');
 		window.confirm(matrix);
 	}
 </script>
