@@ -2,22 +2,45 @@
 <html>
 
 <head>
-    <title>Page publique</title>
-    <meta charset="utf-8">
-    <meta name="description" content="165c. uniques">
+        <title>Page Publique</title>
+        <meta charset="utf-8">
+        <meta name="description" content="165c. uniques">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body>
-	<h1>Authentification XCA - PHP</h1>
-	<p>TELECHARGEMENT MATRICE</p>
-    <p>
-        Télécharger ma matrice
+    <header id="header">
+			<div class="inner">
+				<a href="index.html" class="logo"><strong>Groupe3</strong></a>
+
+				<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+			</div>
+		</header>
+    <<section id="banner">
+				<div class="inner">
+					<header>
+						<h1>XC Authentication - Telechargement Matrice</h1>
+					</header>
+			 </div>
+
+
+
+			</section>
+          <footer id="footer">
+				<div class="inner">
+
+					<h3>Telecharger ma matrice</h3>
         <form action="#" method="POST">
 			ID (email) : <input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" /><br /><br />
 			Code d'activation : <input type="text" name="code" size="30" maxlength="30" /><br /><br />
-            <input type="submit" value="Télécharger"/><br>
+            <li><input type="submit" class="button alt" value="Télécharger"/></li><br>
         </form>
 		
+        
+        <br>
+        <a href="index.php" class="button alt">Retour à l'accueil</a>
+       </footer>
         <?php
 
                 if(isset($_POST['mail']) && isset($_POST['code']))
@@ -49,9 +72,8 @@
 	<button onclick="alert(localStorage.getItem(\'INSACVL3:'.$mail.'\'))">Voir ma matrice</button> ';
 
         ?>
-        </p>
 	
-	<a href="index.php">Retour à l'accueil</a>
+	
 </body>
 </html>
 
