@@ -5,17 +5,43 @@
         <title>Page Publique</title>
         <meta charset="utf-8">
         <meta name="description" content="165c. uniques">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
 </head>
 
 <body>
-    <h1>Authentification XCA - PHP</h1>
-	<p>PHASE IDENTIFICATION</p>
-	<p>
-		Identifiez-vous
-		<form action="#" method="POST">
-			ID (e-mail) : <input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" /><input type="submit" value="Envoyer" /><br>
-		</form>
-	<?php
+    <header id="header">
+			<div class="inner">
+				<a href="index.html" class="logo"><strong>Groupe3</strong></a>
+
+				<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+			</div>
+		</header>
+    <<section id="banner">
+				<div class="inner">
+					<header>
+						<h1>XC Authentication</h1>
+					</header>
+			 </div>
+
+
+
+			</section>
+
+    <footer id="footer">
+				<div class="inner">
+
+					<h3>Identifiez-vous</h3>
+
+					<form action="#" method="POST">
+
+
+							<label for="email">ID (e-mail)</label>
+							<input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" />
+						</div>
+							<li><input type="submit" class="button alt" value="Envoyer" /></li>
+                            <li><a href="matrix.php">Télécharger la matrice</a></li>
+                                <?php
 		// Lorsque l'utilisateur tente de se connecter
 		if(isset($_POST['mail'])){
 
@@ -78,14 +104,66 @@
 
 		}
 	?>
-	</p>
+						</ul>
+					</form>
 
-	<p>.</p>
-	<p>.</p>
-	<a href="matrix.php">Télécharger la matrice</a>
-	<p>.</p>
-	<p>.</p>
-	<p>INSA CVL - GROUPE 3</p>
+
+		</footer>
+	
+
+	
+	
+	<section id="three" class="wrapper align-center">
+				<div class="inner">
+					<header>
+						<h3>Composition de l'équipe</h3>
+					</header>
+					<div class="flex flex-2">
+						<article>
+							<div class="image round">
+								<img src="images/pic01.png" alt="Pic 01" />
+							</div>
+							<header>
+								<h3>Noaman Fakhir Aboulhouda</h3>
+							</header>
+						</article>
+
+
+						<article>
+							<div class="image round">
+								<img src="images/pic02.png" alt="Pic 02" />
+							</div>
+							<header>
+								<h3>Camille Chastain</h3>
+							</header>
+						</article>
+
+						<article>
+							<div class="image round">
+								<img src="images/pic03.png" alt="Pic 03" />
+							</div>
+							<header>
+								<h3>Thierry-Philippe Thiot</h3>
+							</header>
+						</article>
+
+						<article>
+							<div class="image round">
+								<img src="images/pic04.png" alt="Pic 04" />
+							</div>
+							<header>
+								<h3>Joseph Kawalec </h3>
+							</header>
+						</article>
+
+					</div>
+				</div>
+			</section>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
 </body>
 </html>
