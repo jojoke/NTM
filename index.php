@@ -25,7 +25,7 @@
 		$client = new SoapClient($wsdl);
 
 		// L'identifiant existe-t-il pour le service INSACVL ?
-		$param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sSessionVar" => "groupe1");
+		$param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sSessionVar" => "groupe3");
 		$results = $client->__soapCall("ISEXIST_ELEMENTSERVICE_XCAJAX", $param);
 
 		// L'identifiant existe-t-il ?
@@ -85,7 +85,7 @@
 	<a href="matrix.php">Télécharger la matrice</a>
 	<p>.</p>
 	<p>.</p>
-	<p>INSA CVL - GROUPE 1 (BICHARA Soukaïna, CHARRIER Etienne, GENAUX Luc, GEVEAUX Damien, MAHE Romain, MALBOIS Fabien)</p>
+	<p>INSA CVL - GROUPE 3</p>
 
 </body>
 </html>

@@ -35,7 +35,7 @@
 
 					if($results)
 					{
-						//echo $results;
+						echo $results;
 						echo "Téléchargement de la matrice réussi.";
 					}
 					else
@@ -44,9 +44,9 @@
 					}
                 }
 
-	echo '<br /><br/><button onclick="localStorage.setItem(\'INSACVL\', \''.$results.'\')">Enregistrer ma matrice dans le navigateur</button>
+	echo '<br /><br/><button onclick="localStorage.setItem(\'INSACVL3:'.$mail.'\',\''. $results.'\')">Enregistrer ma matrice dans le navigateur</button>
 	<br /><br />
-	<button onclick="alert(localStorage.getItem(\'INSACVL\'))">Voir ma matrice</button> ';
+	<button onclick="alert(localStorage.getItem(\'INSACVL3:'.$mail.'\'))">Voir ma matrice</button> ';
 
         ?>
         </p>
