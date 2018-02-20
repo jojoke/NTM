@@ -17,6 +17,7 @@
 	{
     	$mail = $_POST['mail'];
 		$response = $_POST['response'];
+		$session = $_POST['session'];
 
 		echo "<br />Utilisateur :<br />";
 		echo $mail;
@@ -29,15 +30,21 @@
     	$client = new SoapClient($wsdl);
 
 		// Envoi de la réponse au défi
-    	$param = array("sSessionVar" => "groupe3", "sServiceName" => "INSACVL", "sElementName" => $mail, "sClientResponse" => $response);
+    	$param = array("sSessionVar" => $session, "sServiceName" => "INSACVL", "sElementName" => $mail, "sClientResponse" => $response);
     	$results = $client->__soapCall("SEND_CLIENT_RESPONSE", $param);
 
-		// on regarde si l'authentification a marché ? Marche pas car le résultat pas envoyé en hash sha ?
-		/*	
-		$param = array("sSessionVar" => "groupe1", "sServiceName" => "INSACVL", "sElementName" => $mail);
-        $results = $client->__soapCall("GET_AUTH_RESULT",$param);
-		echo $results
-		*/
+	echo "<br/>";
+		// on regarde si l'authentification a marché ? Marche pas car le résultat pas envoyé en hash sha ?	
+		$param = array("sSessionVar" => $session, "sServiceName" => "INSACVL", "sElementName" => $mail);
+        if($client->__soapCall("GET_AUTH_RESULT",$param))
+	{
+		echo "true";
+	}
+	else
+	{
+		echo "false";
+	}
+		
 	}
 
 ?>

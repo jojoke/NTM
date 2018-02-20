@@ -39,9 +39,11 @@
 							<label for="email">ID (e-mail)</label>
 							<input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" />
 						</div>
+
 							<li><input type="submit" class="button alt" value="Envoyer" /></li>
                             <li><a href="matrix.php" class = "button alt">Télécharger la matrice</a></li>
                                 <?php
+
 		// Lorsque l'utilisateur tente de se connecter
 		if(isset($_POST['mail'])){
 
@@ -50,8 +52,11 @@
 		$wsdl = "http://ntx.pcscloud.net/XCASERVER_WEB/awws/XCAServer.awws?wsdl";
 		$client = new SoapClient($wsdl);
 
+		$session= "groupe3".substr(md5(rand()), 0, 10);
+		echo $session;
+
 		// L'identifiant existe-t-il pour le service INSACVL ?
-		$param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sSessionVar" => "groupe3");
+		$param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sSessionVar" => $session);
 		$results = $client->__soapCall("ISEXIST_ELEMENTSERVICE_XCAJAX", $param);
 
 		// L'identifiant existe-t-il ?
@@ -65,6 +70,7 @@
 				echo '<script> var mat=localStorage.getItem(\'INSACVL3:'.$mail.'\');
 						var chal = \''.$results.'\';
 						var mail = \''.$mail.'\';
+						var session = \''.$session.'\';
 						var result = "";
 
 						chal = chal.split(" ");
@@ -92,6 +98,11 @@
             				hiddenField.setAttribute("type", "hidden");
             				hiddenField.setAttribute("name", "response");
             				hiddenField.setAttribute("value", result);
+            				form.appendChild(hiddenField);
+					var hiddenField = document.createElement("input");
+					hiddenField.setAttribute("type", "hidden");
+            				hiddenField.setAttribute("name", "session");
+            				hiddenField.setAttribute("value", session);
             				form.appendChild(hiddenField);
 
 					document.body.appendChild(form);
