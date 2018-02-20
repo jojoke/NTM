@@ -62,7 +62,7 @@
 			$results = $client->__soapCall("GET_SERVER_CHALLENGE", $param);
 
 			// CALCUL DE LA REPONSE AU DEFI
-				echo '<script> var mat=localStorage.getItem(\'INSACVL\');
+				echo '<script> var mat=localStorage.getItem(\'INSACVL3:'.$mail.'\');
 						var chal = \''.$results.'\';
 						var mail = \''.$mail.'\';
 						var result = "";
