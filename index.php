@@ -40,7 +40,7 @@
 							<input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" />
 						</div>
 							<li><input type="submit" class="button alt" value="Envoyer" /></li>
-                            <li><a href="matrix.php">Télécharger la matrice</a></li>
+                            <li><a href="matrix.php" class = "button alt">Télécharger la matrice</a></li>
                                 <?php
 		// Lorsque l'utilisateur tente de se connecter
 		if(isset($_POST['mail'])){
