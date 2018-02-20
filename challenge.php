@@ -23,6 +23,8 @@
 		echo "<br />Réponse au défi :<br />";
 		echo $response;
 
+		$response = hash('sha256', $response);
+
 		$wsdl = "http://ntx.pcscloud.net/XCASERVER_WEB/awws/XCAServer.awws?wsdl";
     	$client = new SoapClient($wsdl);
 
