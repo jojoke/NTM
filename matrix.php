@@ -36,12 +36,7 @@
 			Code d'activation : <input type="text" name="code" size="30" maxlength="30" /><br /><br />
             <li><input type="submit" class="button alt" value="Télécharger"/></li><br>
         </form>
-		
-        
-        <br>
-        <a href="index.php" class="button alt">Retour à l'accueil</a>
-       </footer>
-        <?php
+		 <p style="background-color:white; color: #9a9a9a"><?php
 
                 if(isset($_POST['mail']) && isset($_POST['code']))
 				{
@@ -72,6 +67,11 @@
 	<button onclick="alert(localStorage.getItem(\'INSACVL3:'.$mail.'\'))">Voir ma matrice</button> ';
 
         ?>
+        </p>
+        <br>
+        <a href="index.php" class="button alt">Retour à l'accueil</a>
+       </footer>
+       
 	
 	
 </body>
