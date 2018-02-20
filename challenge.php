@@ -32,6 +32,10 @@
 		// Envoi de la réponse au défi
     	$param = array("sSessionVar" => $session, "sServiceName" => "INSACVL", "sElementName" => $mail, "sClientResponse" => $response);
     	$results = $client->__soapCall("SEND_CLIENT_RESPONSE", $param);
+	echo "<br/>";
+	$param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sClientResponse" => $response);
+	$session= $client->__soapCall("GET_SESSIONVAR", $param);
+echo $session;
 
 	echo "<br/>";
 		// on regarde si l'authentification a marché ? Marche pas car le résultat pas envoyé en hash sha ?	
