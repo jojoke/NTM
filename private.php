@@ -9,7 +9,7 @@
 
 <body>
     <h1>Private page</h1>
-	à faire
+	Bravo, vous avez atteint la page privée!
 
 </body>
 </html>

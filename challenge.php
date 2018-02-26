@@ -24,7 +24,7 @@
 		echo "<br />Réponse au défi :<br />";
 		echo $response;
 
-		$response = hash('sha256', $response);
+		$response = $client->__soapCall("COMPUTE_HASH",$param);
 
 		$wsdl = "http://ntx.pcscloud.net/XCASERVER_WEB/awws/XCAServer.awws?wsdl";
     	$client = new SoapClient($wsdl);
@@ -42,7 +42,7 @@ echo $session;
 		$param = array("sSessionVar" => $session, "sServiceName" => "INSACVL", "sElementName" => $mail);
         if($client->__soapCall("GET_AUTH_RESULT",$param))
 	{
-		echo "true";
+		header('location:private.php');
 	}
 	else
 	{
