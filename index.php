@@ -14,10 +14,9 @@
 			<div class="inner">
 				<a href="index.html" class="logo"><strong>Groupe3</strong></a>
 
-				<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-			</div>
+				</div>
 		</header>
-    <<section id="banner">
+    <section id="banner">
 				<div class="inner">
 					<header>
 						<h1>XC Authentication</h1>
@@ -28,102 +27,104 @@
 
 			</section>
 
-    <footer id="footer">
-				<div class="inner">
+      <footer id="footer">
+          <div class="inner">
 
-					<h3>Identifiez-vous</h3>
+            <h3>Identifiez-vous</h3>
 
-					<form action="#" method="POST">
+            <form action="#" method="POST">
 
+              <?php
 
-							<label for="email">ID (e-mail)</label>
-							<input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" />
-						</div>
+              // Lorsque l'utilisateur tente de se connecter
+              if(isset($_POST['mail'])){
 
-							<li><input type="submit" class="button alt" value="Envoyer" /></li>
-                            <li><a href="matrix.php" class = "button alt">Télécharger la matrice</a></li>
-                                <?php
+              $mail = htmlspecialchars($_POST['mail']);
 
-		// Lorsque l'utilisateur tente de se connecter
-		if(isset($_POST['mail'])){
+              $wsdl = "http://ntx.pcscloud.net/XCASERVER_WEB/awws/XCAServer.awws?wsdl";
+              $client = new SoapClient($wsdl);
 
-		$mail = htmlspecialchars($_POST['mail']);
+              $session= "groupe3".substr(md5(rand()), 0, 10);
+              echo $session;
 
-		$wsdl = "http://ntx.pcscloud.net/XCASERVER_WEB/awws/XCAServer.awws?wsdl";
-		$client = new SoapClient($wsdl);
+              // L'identifiant existe-t-il pour le service INSACVL ?
+              $param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sSessionVar" => $session);
+              $results = $client->__soapCall("ISEXIST_ELEMENTSERVICE_XCAJAX", $param);
 
-		$session= "groupe3".substr(md5(rand()), 0, 10);
-		echo $session;
+              // L'identifiant existe-t-il ?
+              if($results == 1) {
+              // L'identifiant existe
+              // Demande du Défi
+              $param = array("sServiceName" => "INSACVL", "sElementName" => $mail);
+              $results = $client->__soapCall("GET_SERVER_CHALLENGE", $param);
 
-		// L'identifiant existe-t-il pour le service INSACVL ?
-		$param = array("sServiceName" => "INSACVL", "sElementName" => $mail, "sSessionVar" => $session);
-		$results = $client->__soapCall("ISEXIST_ELEMENTSERVICE_XCAJAX", $param);
+              // CALCUL DE LA REPONSE AU DEFI
+              echo '<script> var mat=localStorage.getItem(\'INSACVL3:'.$mail.'\');
+              var chal = \''.$results.'\';
+              var mail = \''.$mail.'\';
+              var session = \''.$session.'\';
+              var result = "";
 
-		// L'identifiant existe-t-il ?
-		if($results == 1) {
-			// L'identifiant existe
-			// Demande du Défi
-			$param = array("sServiceName" => "INSACVL", "sElementName" => $mail);
-			$results = $client->__soapCall("GET_SERVER_CHALLENGE", $param);
+              chal = chal.split(" ");
 
-			// CALCUL DE LA REPONSE AU DEFI
-				echo '<script> var mat=localStorage.getItem(\'INSACVL3:'.$mail.'\');
-						var chal = \''.$results.'\';
-						var mail = \''.$mail.'\';
-						var session = \''.$session.'\';
-						var result = "";
+              for(var i=0; i< chal.length-1; i++)
+              {
+              result += mat[chal[i]];
+              }
 
-						chal = chal.split(" ");
+              // ça marche bien ! :)
+              //alert(result);
 
-					    for(var i=0; i< chal.length-1; i++)
-						{
-							result += mat[chal[i]];
-						}
+              // Pour sortir la réponse au défi du javascript et le donner au PHP afin de l envoyer,
+              // on envoie via POST le mail et la réponse au défi à une autre page PHP qui enverra la réponse
+              var form = document.createElement("form");
+              form.setAttribute("method", "POST");
+              form.setAttribute("action", "./challenge.php");
 
-						// ça marche bien ! :)
-						//alert(result);
+              var hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type", "hidden");
+              hiddenField.setAttribute("name", "mail");
+              hiddenField.setAttribute("value", mail);
+              form.appendChild(hiddenField);
+              var hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type", "hidden");
+              hiddenField.setAttribute("name", "response");
+              hiddenField.setAttribute("value", result);
+              form.appendChild(hiddenField);
+              var hiddenField = document.createElement("input");
+              hiddenField.setAttribute("type", "hidden");
+              hiddenField.setAttribute("name", "session");
+              hiddenField.setAttribute("value", session);
+              form.appendChild(hiddenField);
 
-					// Pour sortir la réponse au défi du javascript et le donner au PHP afin de l envoyer,
-					// on envoie via POST le mail et la réponse au défi à une autre page PHP qui enverra la réponse
-					var form = document.createElement("form");
-					form.setAttribute("method", "POST");
-					form.setAttribute("action", "./challenge.php");
+              document.body.appendChild(form);
+              form.submit();
+              </script>';
 
-					var hiddenField = document.createElement("input");
-            				hiddenField.setAttribute("type", "hidden");
-            				hiddenField.setAttribute("name", "mail");
-            				hiddenField.setAttribute("value", mail);
-            				form.appendChild(hiddenField);
-					var hiddenField = document.createElement("input");
-            				hiddenField.setAttribute("type", "hidden");
-            				hiddenField.setAttribute("name", "response");
-            				hiddenField.setAttribute("value", result);
-            				form.appendChild(hiddenField);
-					var hiddenField = document.createElement("input");
-					hiddenField.setAttribute("type", "hidden");
-            				hiddenField.setAttribute("name", "session");
-            				hiddenField.setAttribute("value", session);
-            				form.appendChild(hiddenField);
+              // L'identifiant n'existe pas
+              } else
+              echo "<br> Utilisateur inconnu.";
 
-					document.body.appendChild(form);
-					form.submit();
-				</script>';
-
-		// L'identifiant n'existe pas
-		} else
-			echo "<br> Utilisateur inconnu.";
-
-		}
-	?>
-						</ul>
-					</form>
+              }
+              ?>
+                <label for="email">ID (e-mail)</label>
+                <input type="text" name="mail" size="70" maxlength="70" value="camille.chastain@insa-cvl.fr" />
 
 
-		</footer>
-	
+                <li><input type="submit" class="button alt" value="Envoyer" /></li>
+                <li><a href="matrix.php" class = "button alt">Télécharger la matrice</a></li>
 
-	
-	
+
+
+            </form>
+          </div>
+
+      </footer>
+
+
+
+
+
 	<section id="three" class="wrapper align-center">
 				<div class="inner">
 					<header>

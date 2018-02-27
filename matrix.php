@@ -14,10 +14,9 @@
 			<div class="inner">
 				<a href="index.html" class="logo"><strong>Groupe3</strong></a>
 
-				<a href="#navPanel" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 			</div>
 		</header>
-    <<section id="banner">
+    <section id="banner">
 				<div class="inner">
 					<header>
 						<h1>XC Authentication - Telechargement Matrice</h1>
@@ -27,20 +26,23 @@
 
 
 			</section>
-          <footer id="footer">
+      <footer id="footer">
 				<div class="inner">
 
 					<h3>Telecharger ma matrice</h3>
         <form action="#" method="POST">
-			ID (email) : <input type="text" name="mail" size="70" maxlength="70" value="utilisateur@mondomaine.com" /><br /><br />
-			Code d'activation : <input type="text" name="code" size="30" maxlength="30" /><br /><br />
-            <li><input type="submit" class="button alt" value="Télécharger"/></li><br>
+			       ID (email) : <input type="text" name="mail" size="70" maxlength="70" value="camille.chastain@insa-cvl.fr" /><br /><br />
+             <? // code : 9PND83V8FA2J
+                // #OWASPCHALLENGE ?>
+             Code d'activation : <input type="text" name="code" size="30" maxlength="30" /><br /><br />
+             <li><input type="submit" class="button alt" value="Télécharger"/></li><br>
         </form>
-		
-        
-        <br>
+
+
+
         <a href="index.php" class="button alt">Retour à l'accueil</a>
-       </footer>
+      </div>
+        </footer>
         <?php
 
                 if(isset($_POST['mail']) && isset($_POST['code']))
@@ -59,7 +61,7 @@
 					if($results)
 					{
 						echo $results;
-						echo "Téléchargement de la matrice réussi.";
+						echo "</br>Téléchargement de la matrice réussi.";
 					}
 					else
 					{
@@ -67,13 +69,16 @@
 					}
                 }
 
-	echo '<br /><br/><button onclick="localStorage.setItem(\'INSACVL3:'.$mail.'\',\''. $results.'\')">Enregistrer ma matrice dans le navigateur</button>
+	echo '<footer id="footer">
+
+    <br /><br/><button onclick="localStorage.setItem(\'INSACVL3:'.$mail.'\',\''. $results.'\')" class="button alt">Enregistrer ma matrice dans le navigateur</button>
 	<br /><br />
-	<button onclick="alert(localStorage.getItem(\'INSACVL3:'.$mail.'\'))">Voir ma matrice</button> ';
+	<button onclick="alert(localStorage.getItem(\'INSACVL3:'.$mail.'\'))" class="button alt">Voir ma matrice</button>
+
+    </footer>';
 
         ?>
-	
-	
+
+
 </body>
 </html>
-
